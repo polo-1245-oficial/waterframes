@@ -51,6 +51,11 @@ public class WidgetURLTextField extends GuiTextfield {
     }
 
     public static boolean isUrlValid(String url) {
-        try { new URL(url); return true; } catch (Exception ignored) { return false; }
+        try {
+            URI uri = new URI(url);
+            return uri.getScheme() != null;
+        } catch (URISyntaxException ignored) {
+            return false;
+        }
     }
 }
